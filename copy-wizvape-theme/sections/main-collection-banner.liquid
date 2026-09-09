@@ -1,0 +1,164 @@
+{% comment %}
+  Section: Main Collection Banner
+  Renders collection title, description, promotional multi-buy deal banners, and horizontal brand filter tabs
+{% endcomment %}
+
+<header class="collection-header">
+  <div class="container">
+    <h1 class="collection-header__title">{{ collection.title | escape }}</h1>
+
+    {%- if section.settings.show_collection_description and collection.description != blank -%}
+      <div class="collection-header__desc rte">
+        {{ collection.description }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_deal_banners -%}
+      <!-- Multi-buy Promotional Deal Banners -->
+      <div class="deal-banners-grid">
+        <div class="deal-banner-card deal-banner-card--pink">
+          <div class="deal-banner-card__content">
+            <span class="deal-banner-card__tag">Multi-Buy Special</span>
+            <div class="deal-banner-card__title">{{ section.settings.banner_1_title | default: '2 FOR £16' }}</div>
+            <p class="deal-banner-card__sub">{{ section.settings.banner_1_sub | default: 'Mix & Match Top Kits &rarr;' }}</p>
+          </div>
+          {%- if section.settings.banner_1_image != blank -%}
+            <div class="deal-banner-card__image-wrap">
+              {{ section.settings.banner_1_image | image_url: width: 200 | image_tag: class: 'deal-banner-card__image', loading: 'lazy', alt: section.settings.banner_1_title | escape }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="deal-banner-card deal-banner-card--emerald">
+          <div class="deal-banner-card__content">
+            <span class="deal-banner-card__tag">Big Puff Deals</span>
+            <div class="deal-banner-card__title">{{ section.settings.banner_2_title | default: '2 FOR £20' }}</div>
+            <p class="deal-banner-card__sub">{{ section.settings.banner_2_sub | default: 'High Capacity Pod Systems &rarr;' }}</p>
+          </div>
+          {%- if section.settings.banner_2_image != blank -%}
+            <div class="deal-banner-card__image-wrap">
+              {{ section.settings.banner_2_image | image_url: width: 200 | image_tag: class: 'deal-banner-card__image', loading: 'lazy', alt: section.settings.banner_2_title | escape }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="deal-banner-card deal-banner-card--blue">
+          <div class="deal-banner-card__content">
+            <span class="deal-banner-card__tag">Starter Bundles</span>
+            <div class="deal-banner-card__title">{{ section.settings.banner_3_title | default: '4 FOR £12' }}</div>
+            <p class="deal-banner-card__sub">{{ section.settings.banner_3_sub | default: 'Pocket Pod Kits & Refills &rarr;' }}</p>
+          </div>
+          {%- if section.settings.banner_3_image != blank -%}
+            <div class="deal-banner-card__image-wrap">
+              {{ section.settings.banner_3_image | image_url: width: 200 | image_tag: class: 'deal-banner-card__image', loading: 'lazy', alt: section.settings.banner_3_title | escape }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_brand_tabs -%}
+      {%- assign active_vendor = '' -%}
+      {%- for filter in collection.filters -%}
+        {%- if filter.param_name == 'filter.p.vendor' -%}
+          {%- for value in filter.active_values -%}
+            {%- assign active_vendor = value.label -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <!-- Horizontal Brand Filter Tab Bar -->
+      <div class="brand-tabs-wrapper">
+        <div class="brand-tabs-bar" role="tablist">
+          <a href="{{ collection.url }}" class="brand-tab-btn{% if active_vendor == '' and current_tags == blank %} is-active{% endif %}">
+            All Brands
+          </a>
+          {%- assign brand_list = 'Lost Mary,Elf Bar,SKE Crystal,Hayati,Elux,VooPoo,Oxva,IVG' | split: ',' -%}
+          {%- for b in brand_list -%}
+            <a href="{{ collection.url }}?filter.p.vendor={{ b | url_encode }}" class="brand-tab-btn{% if active_vendor == b %} is-active{% endif %}">
+              {{ b }}
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Collection Banner & Deals",
+  "class": "section-collection-banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "default": true,
+      "label": "Show collection description"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_deal_banners",
+      "default": true,
+      "label": "Show multi-buy deal banner row"
+    },
+    {
+      "type": "text",
+      "id": "banner_1_title",
+      "label": "Banner 1 Title",
+      "default": "2 FOR £16"
+    },
+    {
+      "type": "text",
+      "id": "banner_1_sub",
+      "label": "Banner 1 Subtitle",
+      "default": "Mix & Match Top Kits &rarr;"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_1_image",
+      "label": "Banner 1 Image"
+    },
+    {
+      "type": "text",
+      "id": "banner_2_title",
+      "label": "Banner 2 Title",
+      "default": "2 FOR £20"
+    },
+    {
+      "type": "text",
+      "id": "banner_2_sub",
+      "label": "Banner 2 Subtitle",
+      "default": "High Capacity Pod Systems &rarr;"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_2_image",
+      "label": "Banner 2 Image"
+    },
+    {
+      "type": "text",
+      "id": "banner_3_title",
+      "label": "Banner 3 Title",
+      "default": "4 FOR £12"
+    },
+    {
+      "type": "text",
+      "id": "banner_3_sub",
+      "label": "Banner 3 Subtitle",
+      "default": "Pocket Pod Kits & Refills &rarr;"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_3_image",
+      "label": "Banner 3 Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_brand_tabs",
+      "default": true,
+      "label": "Show horizontal brand tab bar"
+    }
+  ]
+}
+{% endschema %}

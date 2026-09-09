@@ -1,0 +1,1707 @@
+<!doctype html>
+<html class="js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefilled Pod Kits &ndash; WizVape Collection Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      /* ==========================================================================
+         WizVape Theme Exact Redesign Stylesheet
+         ========================================================================== */
+      :root {
+        --color-bg: #ffffff;
+        --color-surface: #f8fafc;
+        --color-surface-hover: #f1f5f9;
+        --color-border: #e2e8f0;
+        --color-border-subtle: #edf2f7;
+        --color-text-main: #0f172a;
+        --color-text-muted: #64748b;
+        --color-text-subtle: #94a3b8;
+        
+        --color-primary: #0284c7;
+        --color-primary-dark: #0369a1;
+        
+        /* Badges */
+        --color-flavour-bg: #059669; /* Teal / Green */
+        --color-flavour-text: #ffffff;
+        --color-deal-bg: #e11d48;    /* Pink / Magenta */
+        --color-deal-text: #ffffff;
+        
+        /* Specs & Status */
+        --color-spec-bg: #f1f5f9;
+        --color-spec-text: #475569;
+        --color-led-bg: #eff6ff;
+        --color-led-text: #2563eb;
+        --color-led-border: #bfdbfe;
+        --color-instock: #16a34a;
+        --color-outstock: #dc2626;
+
+        --font-base: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+        --radius-full: 9999px;
+        --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+        --shadow-hover: 0 8px 20px -4px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      }
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--color-bg);
+        color: var(--color-text-main);
+        font-family: var(--font-base);
+        font-size: 0.875rem;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      /* Top Demo Bar */
+      .demo-notice-bar {
+        background: #0f172a;
+        color: #f8fafc;
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #334155;
+      }
+      .demo-notice-bar strong { color: #38bdf8; }
+      .demo-badge {
+        background: #0284c7;
+        color: #fff;
+        padding: 0.15rem 0.5rem;
+        border-radius: var(--radius-full);
+        font-weight: 700;
+        font-size: 0.6875rem;
+        margin-right: 0.5rem;
+      }
+      .demo-reset-btn {
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.25);
+        color: #fff;
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        cursor: pointer;
+      }
+      .demo-reset-btn:hover { background: #0284c7; }
+
+      /* ==========================================================================
+         Header Section
+         ========================================================================== */
+      .collection-header {
+        padding: 2rem 0 1.25rem 0;
+        border-bottom: 1px solid var(--color-border);
+        background: #ffffff;
+      }
+
+      .collection-header__title {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.875rem;
+        font-weight: 800;
+        color: var(--color-text-main);
+        letter-spacing: -0.02em;
+      }
+
+      .collection-header__desc {
+        color: var(--color-text-muted);
+        font-size: 0.875rem;
+        line-height: 1.6;
+        max-width: 900px;
+        margin: 0 0 1.5rem 0;
+      }
+
+      /* Multi-buy Promotional Deal Banners */
+      .deal-banners-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+      }
+
+      .deal-banner-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--color-border);
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        position: relative;
+        overflow: hidden;
+        transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+      }
+
+      .deal-banner-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px -2px rgba(0,0,0,0.08);
+        border-color: #cbd5e1;
+      }
+
+      .deal-banner-card--pink {
+        background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+        border-color: #fecdd3;
+      }
+      .deal-banner-card--emerald {
+        background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        border-color: #a7f3d0;
+      }
+      .deal-banner-card--blue {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-color: #bae6fd;
+      }
+
+      .deal-banner-card__content {
+        flex: 1;
+        z-index: 1;
+      }
+
+      .deal-banner-card__tag {
+        display: inline-block;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #475569;
+        margin-bottom: 0.25rem;
+      }
+
+      .deal-banner-card--pink .deal-banner-card__tag { color: #be123c; }
+      .deal-banner-card--emerald .deal-banner-card__tag { color: #047857; }
+      .deal-banner-card--blue .deal-banner-card__tag { color: #0369a1; }
+
+      .deal-banner-card__title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin: 0 0 0.25rem 0;
+        letter-spacing: -0.01em;
+        color: var(--color-text-main);
+      }
+
+      .deal-banner-card__sub {
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-weight: 600;
+      }
+
+      .deal-banner-card__image-wrap {
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+        margin-left: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .deal-banner-card__image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+      }
+
+      /* Horizontal Brand Filter Tab Bar */
+      .brand-tabs-wrapper {
+        margin-top: 0.5rem;
+      }
+
+      .brand-tabs-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        overflow-x: auto;
+        padding-bottom: 0.25rem;
+        scrollbar-width: thin;
+      }
+      .brand-tabs-bar::-webkit-scrollbar { height: 4px; }
+      .brand-tabs-bar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+      .brand-tab-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.45rem 1rem;
+        background: #ffffff;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-full);
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-text-main);
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 150ms ease;
+      }
+
+      .brand-tab-btn:hover {
+        border-color: var(--color-text-main);
+        background: var(--color-surface);
+      }
+
+      .brand-tab-btn.is-active {
+        background: var(--color-text-main);
+        color: #ffffff;
+        border-color: var(--color-text-main);
+      }
+
+      /* ==========================================================================
+         Main Layout: Left Sidebar + Product Area
+         ========================================================================== */
+      .collection-main-layout {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 2rem;
+        padding: 1.75rem 0 4rem 0;
+      }
+
+      /* Sticky Left Sidebar - Filters Panel */
+      .filters-sidebar {
+        position: sticky;
+        top: 1.5rem;
+        align-self: start;
+        max-height: calc(100vh - 3rem);
+        overflow-y: auto;
+        padding-right: 0.75rem;
+        scrollbar-width: thin;
+      }
+      .filters-sidebar::-webkit-scrollbar { width: 4px; }
+      .filters-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+      .filters-sidebar__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--color-text-main);
+        margin-bottom: 0.75rem;
+      }
+
+      .filters-sidebar__title {
+        font-size: 1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .filters-sidebar__clear-all {
+        font-size: 0.75rem;
+        color: #e11d48;
+        text-decoration: underline;
+        font-weight: 600;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      /* Collapsible Filter Sections */
+      .filter-section {
+        border-bottom: 1px solid var(--color-border);
+        padding: 0.875rem 0;
+      }
+
+      .filter-section__summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        list-style: none;
+        user-select: none;
+      }
+      .filter-section__summary::-webkit-details-marker { display: none; }
+
+      .filter-section__title {
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--color-text-main);
+      }
+
+      .filter-section__caret {
+        transition: transform 150ms ease;
+        color: var(--color-text-muted);
+      }
+      .filter-section[open] .filter-section__caret {
+        transform: rotate(180deg);
+      }
+
+      .filter-section__body {
+        padding-top: 0.625rem;
+      }
+
+      .filter-options-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .filter-checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        font-size: 0.8125rem;
+        color: #334155;
+        user-select: none;
+      }
+
+      .filter-checkbox-label:hover {
+        color: var(--color-text-main);
+      }
+
+      .filter-checkbox-input {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 3px;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        flex-shrink: 0;
+        transition: all 120ms ease;
+        background: #fff;
+      }
+
+      .filter-checkbox-input:checked {
+        background-color: var(--color-text-main);
+        border-color: var(--color-text-main);
+      }
+
+      .filter-checkbox-input:checked::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 5px;
+        width: 4px;
+        height: 8px;
+        border: solid #ffffff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+
+      .filter-checkbox-name {
+        flex: 1;
+      }
+
+      .filter-checkbox-count {
+        color: var(--color-text-subtle);
+        font-size: 0.75rem;
+      }
+
+      .filter-see-more-btn {
+        background: none;
+        border: none;
+        color: var(--color-primary);
+        font-size: 0.75rem;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0.35rem 0 0 0;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+      .filter-see-more-btn:hover {
+        text-decoration: underline;
+      }
+
+      /* Hidden extra options */
+      .filter-extra-options {
+        display: none;
+      }
+      .filter-extra-options.is-expanded {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        margin-top: 0.4rem;
+      }
+
+      /* ==========================================================================
+         Right Product Content Area & Sort Bar
+         ========================================================================== */
+      .collection-content-area {
+        min-width: 0;
+      }
+
+      .collection-sort-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .collection-sort-bar__count {
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+      }
+      .collection-sort-bar__count strong {
+        color: var(--color-text-main);
+      }
+
+      .collection-sort-bar__sort-wrap {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+      }
+
+      .collection-sort-bar__label {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-text-muted);
+      }
+
+      .collection-sort-select {
+        -webkit-appearance: none;
+        appearance: none;
+        background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 0.75rem center;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        padding: 0.45rem 2.25rem 0.45rem 0.875rem;
+        font-family: inherit;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-text-main);
+        cursor: pointer;
+        min-width: 160px;
+        transition: border-color 150ms ease;
+      }
+      .collection-sort-select:hover { border-color: #94a3b8; }
+      .collection-sort-select:focus-visible { outline: 2px solid var(--color-primary); }
+
+      /* Active Filters Chips Row */
+      .active-chips-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+        padding: 0.5rem 0.75rem;
+        background: var(--color-surface);
+        border-radius: var(--radius-sm);
+      }
+      .active-chips-bar__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+      }
+      .active-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: #fff;
+        border: 1px solid var(--color-border);
+        padding: 0.2rem 0.5rem;
+        border-radius: var(--radius-full);
+        font-size: 0.75rem;
+        color: var(--color-text-main);
+      }
+      .active-chip-remove {
+        cursor: pointer;
+        color: #94a3b8;
+        display: flex;
+      }
+      .active-chip-remove:hover { color: #e11d48; }
+
+      /* ==========================================================================
+         Product Grid (4 Columns) & Card Design
+         ========================================================================== */
+      .product-grid-4col {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.25rem 1rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .product-card {
+        background: #ffffff;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+        transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+      }
+
+      .product-card:hover {
+        border-color: #cbd5e1;
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-2px);
+      }
+
+      /* Badges Row (Top Left: Flavours | Top Right: Multi-Buy) */
+      .product-card__badges {
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+        right: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 3;
+        pointer-events: none;
+      }
+
+      .flavour-badge {
+        background-color: var(--color-flavour-bg);
+        color: var(--color-flavour-text);
+        font-size: 0.6875rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 0.2rem 0.45rem;
+        border-radius: var(--radius-sm);
+        line-height: 1.1;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      }
+
+      .deal-badge {
+        background-color: var(--color-deal-bg);
+        color: var(--color-deal-text);
+        font-size: 0.6875rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 0.2rem 0.45rem;
+        border-radius: var(--radius-sm);
+        line-height: 1.1;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      }
+
+      /* Media wrapper with Centered Product Image */
+      .product-card__media-wrap {
+        position: relative;
+        width: 100%;
+        padding-top: 100%; /* 1:1 Aspect ratio */
+        background: #ffffff;
+        overflow: hidden;
+      }
+
+      .product-card__image-link {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem 1rem 0.5rem 1rem;
+      }
+
+      .product-card__image {
+        max-width: 82%;
+        max-height: 82%;
+        object-fit: contain;
+        transition: transform 300ms ease, opacity 250ms ease;
+      }
+
+      .product-card__image--secondary {
+        position: absolute;
+        opacity: 0;
+      }
+
+      .product-card:hover .product-card__image--primary:has(~ .product-card__image--secondary) {
+        opacity: 0;
+      }
+      .product-card:hover .product-card__image--secondary {
+        opacity: 1;
+      }
+      .product-card:hover .product-card__image {
+        transform: scale(1.05);
+      }
+
+      /* Content Area */
+      .product-card__content {
+        padding: 0.875rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        border-top: 1px solid var(--color-border-subtle);
+        background: #ffffff;
+      }
+
+      /* Specs Row (Tags below image) */
+      .product-card__specs-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.3rem;
+        margin-bottom: 0.625rem;
+      }
+
+      .spec-pill {
+        display: inline-flex;
+        align-items: center;
+        background: var(--color-spec-bg);
+        color: var(--color-spec-text);
+        font-size: 0.6875rem;
+        font-weight: 600;
+        padding: 0.15rem 0.4rem;
+        border-radius: 3px;
+        line-height: 1.2;
+      }
+
+      .spec-pill--led {
+        background: var(--color-led-bg);
+        color: var(--color-led-text);
+        border: 1px solid var(--color-led-border);
+        font-weight: 700;
+      }
+
+      /* Product Name */
+      .product-card__title {
+        margin: 0 0 0.35rem 0;
+        font-size: 0.875rem;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+
+      .product-card__title-link {
+        color: var(--color-text-main);
+        text-decoration: none;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .product-card__title-link:hover {
+        color: var(--color-primary);
+      }
+
+      /* Price Row */
+      .product-card__price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        margin-top: auto;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-price-current {
+        font-size: 1.0625rem;
+        font-weight: 800;
+        color: var(--color-text-main);
+      }
+
+      .product-price-compare {
+        font-size: 0.8125rem;
+        color: var(--color-text-subtle);
+        text-decoration: line-through;
+      }
+
+      /* Stock Status */
+      .product-card__stock-status {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
+
+      .stock-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: var(--radius-full);
+      }
+
+      .stock-status--in {
+        color: var(--color-instock);
+      }
+      .stock-status--in .stock-dot {
+        background-color: var(--color-instock);
+      }
+
+      .stock-status--out {
+        color: var(--color-outstock);
+      }
+      .stock-status--out .stock-dot {
+        background-color: var(--color-outstock);
+      }
+
+      /* Card Action Button */
+      .product-card__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        background: #f8fafc;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        font-size: 0.8125rem;
+        font-weight: 700;
+        color: var(--color-text-main);
+        text-decoration: none;
+        transition: all 120ms ease;
+      }
+
+      .product-card__button:hover {
+        background: var(--color-text-main);
+        border-color: var(--color-text-main);
+        color: #ffffff;
+      }
+
+      /* ==========================================================================
+         Empty State
+         ========================================================================== */
+      .collection-empty {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3.5rem 1rem;
+        background: var(--color-surface);
+        border-radius: var(--radius-md);
+        border: 1px dashed var(--color-border);
+      }
+      .collection-empty__title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin: 0 0 0.5rem 0;
+      }
+      .collection-empty__text {
+        color: var(--color-text-muted);
+        margin: 0 0 1rem 0;
+      }
+      .collection-empty__btn {
+        background: var(--color-text-main);
+        color: #fff;
+        border: none;
+        padding: 0.6rem 1.25rem;
+        border-radius: var(--radius-sm);
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      /* ==========================================================================
+         Responsive Design
+         ========================================================================== */
+      @media (max-width: 1200px) {
+        .product-grid-4col {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 992px) {
+        .deal-banners-grid {
+          grid-template-columns: 1fr;
+        }
+        .collection-main-layout {
+          grid-template-columns: 1fr;
+        }
+        .filters-sidebar {
+          display: none; /* In production, toggled via mobile drawer */
+        }
+        .product-grid-4col {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .product-grid-4col {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0.75rem;
+        }
+        .product-card__content {
+          padding: 0.625rem;
+        }
+        .product-card__title {
+          font-size: 0.8125rem;
+        }
+        .product-price-current {
+          font-size: 0.9375rem;
+        }
+        .product-card__button {
+          font-size: 0.75rem;
+          padding: 0.4rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Top Interactive Helper Bar -->
+    <div class="demo-notice-bar">
+      <div>
+        <span class="demo-badge">WizVape Theme Match</span>
+        <span>Sticky Sidebar &bull; Multi-Buy Banners &bull; Brand Tab Bar &bull; 4-Col Grid with Flavour &amp; Deal Badges</span>
+      </div>
+      <div>
+        <button type="button" class="demo-reset-btn" onclick="resetAllFilters()">Reset All Filters</button>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         HEADER SECTION: Title + Description + Deal Banners + Brand Tabs
+         ======================================================================== -->
+    <header class="collection-header">
+      <div class="container">
+        <h1 class="collection-header__title">Prefilled Pod Kits</h1>
+        <p class="collection-header__desc">
+          Browse our huge selection of prefilled pod vape kits. Featuring closed-system devices from top industry brands with inhale activation, built-in rechargeable batteries, and smooth salt-nicotine satisfaction.
+        </p>
+
+        <!-- Multi-buy Promotional Deal Banners (2-3 side by side) -->
+        <div class="deal-banners-grid">
+          
+          <!-- Banner 1: 2 FOR £16 -->
+          <div class="deal-banner-card deal-banner-card--pink" onclick="filterByDeal('2 for £16')">
+            <div class="deal-banner-card__content">
+              <span class="deal-banner-card__tag">Multi-Buy Special</span>
+              <div class="deal-banner-card__title">2 FOR £16</div>
+              <p class="deal-banner-card__sub">Mix &amp; Match Top Kits &rarr;</p>
+            </div>
+            <div class="deal-banner-card__image-wrap">
+              <img class="deal-banner-card__image" src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=200&auto=format&fit=crop&q=80" alt="2 for £16 Pod Kits">
+            </div>
+          </div>
+
+          <!-- Banner 2: 2 FOR £20 -->
+          <div class="deal-banner-card deal-banner-card--emerald" onclick="filterByDeal('2 for £20')">
+            <div class="deal-banner-card__content">
+              <span class="deal-banner-card__tag">Big Puff Deals</span>
+              <div class="deal-banner-card__title">2 FOR £20</div>
+              <p class="deal-banner-card__sub">High Capacity Pod Systems &rarr;</p>
+            </div>
+            <div class="deal-banner-card__image-wrap">
+              <img class="deal-banner-card__image" src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=200&auto=format&fit=crop&q=80" alt="2 for £20 Big Puffs">
+            </div>
+          </div>
+
+          <!-- Banner 3: 4 FOR £12 -->
+          <div class="deal-banner-card deal-banner-card--blue" onclick="filterByDeal('4 for £12')">
+            <div class="deal-banner-card__content">
+              <span class="deal-banner-card__tag">Starter Bundles</span>
+              <div class="deal-banner-card__title">4 FOR £12</div>
+              <p class="deal-banner-card__sub">Pocket Pod Kits &amp; Refills &rarr;</p>
+            </div>
+            <div class="deal-banner-card__image-wrap">
+              <img class="deal-banner-card__image" src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=200&auto=format&fit=crop&q=80" alt="4 for £12 Pods">
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Horizontal Brand Filter Tab Bar -->
+        <div class="brand-tabs-wrapper">
+          <div class="brand-tabs-bar" role="tablist">
+            <button type="button" class="brand-tab-btn is-active" data-brand="all" onclick="selectBrandTab('all')">All Brands</button>
+            <button type="button" class="brand-tab-btn" data-brand="Lost Mary" onclick="selectBrandTab('Lost Mary')">Lost Mary</button>
+            <button type="button" class="brand-tab-btn" data-brand="Elf Bar" onclick="selectBrandTab('Elf Bar')">Elf Bar</button>
+            <button type="button" class="brand-tab-btn" data-brand="SKE Crystal" onclick="selectBrandTab('SKE Crystal')">SKE Crystal</button>
+            <button type="button" class="brand-tab-btn" data-brand="Hayati" onclick="selectBrandTab('Hayati')">Hayati</button>
+            <button type="button" class="brand-tab-btn" data-brand="Elux" onclick="selectBrandTab('Elux')">Elux</button>
+            <button type="button" class="brand-tab-btn" data-brand="VooPoo" onclick="selectBrandTab('VooPoo')">VooPoo</button>
+            <button type="button" class="brand-tab-btn" data-brand="Oxva" onclick="selectBrandTab('Oxva')">Oxva</button>
+            <button type="button" class="brand-tab-btn" data-brand="IVG" onclick="selectBrandTab('IVG')">IVG</button>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ========================================================================
+         MAIN SECTION: Left Sidebar Filters + 4-Column Product Grid
+         ======================================================================== -->
+    <div class="container">
+      <div class="collection-main-layout">
+        
+        <!-- LEFT SIDEBAR: Sticky Filters Panel -->
+        <aside class="filters-sidebar" aria-label="Filters">
+          <div class="filters-sidebar__header">
+            <h2 class="filters-sidebar__title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line></svg>
+              Filters
+            </h2>
+            <button type="button" class="filters-sidebar__clear-all" onclick="resetAllFilters()">Clear All</button>
+          </div>
+
+          <!-- Section 1: Multi Buy -->
+          <details class="filter-section" open>
+            <summary class="filter-section__summary">
+              <span class="filter-section__title">Multi Buy</span>
+              <svg class="filter-section__caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="filter-section__body">
+              <ul class="filter-options-list">
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="multiBuy" value="2 for £16" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">2 for £16</span>
+                    <span class="filter-checkbox-count">(6)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="multiBuy" value="2 for £20" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">2 for £20</span>
+                    <span class="filter-checkbox-count">(5)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="multiBuy" value="4 for £12" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">4 for £12</span>
+                    <span class="filter-checkbox-count">(5)</span>
+                  </label>
+                </li>
+              </ul>
+              <div class="filter-extra-options" id="extraMultiBuy">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="multiBuy" value="3 for £15" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                  <span class="filter-checkbox-name">3 for £15</span>
+                  <span class="filter-checkbox-count">(3)</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="multiBuy" value="5 for £20" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                  <span class="filter-checkbox-name">5 for £20</span>
+                  <span class="filter-checkbox-count">(2)</span>
+                </label>
+              </div>
+              <button type="button" class="filter-see-more-btn" onclick="toggleSeeMore('extraMultiBuy', this)">+ See more</button>
+            </div>
+          </details>
+
+          <!-- Section 2: Brand -->
+          <details class="filter-section" open>
+            <summary class="filter-section__summary">
+              <span class="filter-section__title">Brand</span>
+              <svg class="filter-section__caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="filter-section__body">
+              <ul class="filter-options-list">
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="brand" value="Lost Mary" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">Lost Mary</span>
+                    <span class="filter-checkbox-count">(4)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="brand" value="Elf Bar" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">Elf Bar</span>
+                    <span class="filter-checkbox-count">(4)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="brand" value="SKE Crystal" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">SKE Crystal</span>
+                    <span class="filter-checkbox-count">(3)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="brand" value="Hayati" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">Hayati</span>
+                    <span class="filter-checkbox-count">(2)</span>
+                  </label>
+                </li>
+              </ul>
+              <div class="filter-extra-options" id="extraBrands">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="brand" value="Elux" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                  <span class="filter-checkbox-name">Elux</span>
+                  <span class="filter-checkbox-count">(2)</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="brand" value="VooPoo" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                  <span class="filter-checkbox-name">VooPoo</span>
+                  <span class="filter-checkbox-count">(2)</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="brand" value="Oxva" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                  <span class="filter-checkbox-name">Oxva</span>
+                  <span class="filter-checkbox-count">(2)</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="brand" value="IVG" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                  <span class="filter-checkbox-name">IVG</span>
+                  <span class="filter-checkbox-count">(1)</span>
+                </label>
+              </div>
+              <button type="button" class="filter-see-more-btn" onclick="toggleSeeMore('extraBrands', this)">+ See more</button>
+            </div>
+          </details>
+
+          <!-- Section 3: Puff Count -->
+          <details class="filter-section" open>
+            <summary class="filter-section__summary">
+              <span class="filter-section__title">Puff Count</span>
+              <svg class="filter-section__caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="filter-section__body">
+              <ul class="filter-options-list">
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="puffs" value="600 Puffs" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">600 Puffs</span>
+                    <span class="filter-checkbox-count">(7)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="puffs" value="1000 Puffs" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">1000 Puffs</span>
+                    <span class="filter-checkbox-count">(3)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="puffs" value="2400 Puffs" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">2400 Puffs</span>
+                    <span class="filter-checkbox-count">(3)</span>
+                  </label>
+                </li>
+              </ul>
+              <div class="filter-extra-options" id="extraPuffs">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="puffs" value="6000 Puffs" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                  <span class="filter-checkbox-name">6000 Puffs</span>
+                  <span class="filter-checkbox-count">(2)</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" name="puffs" value="15000 Puffs" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                  <span class="filter-checkbox-name">15000 Puffs</span>
+                  <span class="filter-checkbox-count">(1)</span>
+                </label>
+              </div>
+              <button type="button" class="filter-see-more-btn" onclick="toggleSeeMore('extraPuffs', this)">+ See more</button>
+            </div>
+          </details>
+
+          <!-- Section 4: Refilling -->
+          <details class="filter-section" open>
+            <summary class="filter-section__summary">
+              <span class="filter-section__title">Refilling</span>
+              <svg class="filter-section__caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="filter-section__body">
+              <ul class="filter-options-list">
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="refilling" value="Prefilled" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">Prefilled Pods</span>
+                    <span class="filter-checkbox-count">(14)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="refilling" value="Replaceable" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">Replaceable Pod</span>
+                    <span class="filter-checkbox-count">(12)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-checkbox-label">
+                    <input type="checkbox" name="refilling" value="Refillable" class="filter-checkbox-input" onchange="handleSidebarChange()">
+                    <span class="filter-checkbox-name">Refillable Hybrid</span>
+                    <span class="filter-checkbox-count">(2)</span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+        </aside>
+
+        <!-- RIGHT AREA: Sort Bar + Active Chips + 4-Column Product Grid -->
+        <main class="collection-content-area">
+          
+          <!-- Sort Bar -->
+          <div class="collection-sort-bar">
+            <div class="collection-sort-bar__count" id="productCountStatus">
+              Showing <strong id="productCountNum">16</strong> products
+            </div>
+
+            <div class="collection-sort-bar__sort-wrap">
+              <label for="sortDropdown" class="collection-sort-bar__label">Sort by:</label>
+              <select id="sortDropdown" class="collection-sort-select" onchange="handleSort(this.value)">
+                <option value="best-selling" selected>Best Selling</option>
+                <option value="featured">Featured</option>
+                <option value="price-low">Price, low to high</option>
+                <option value="price-high">Price, high to low</option>
+                <option value="title-az">Alphabetically, A-Z</option>
+                <option value="title-za">Alphabetically, Z-A</option>
+                <option value="date-new">Date, new to old</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Active Filter Chips -->
+          <div class="active-chips-bar" id="activeChipsRow" style="display: none;">
+            <span class="active-chips-bar__label">Active:</span>
+            <div id="activeChipsList" style="display: flex; flex-wrap: wrap; gap: 0.35rem;"></div>
+          </div>
+
+          <!-- 4-Column Product Grid -->
+          <ul class="product-grid-4col" id="productsGrid" role="list">
+            <!-- Dynamically injected via JavaScript -->
+          </ul>
+
+        </main>
+
+      </div>
+    </div>
+
+    <!-- Interactive Script -->
+    <script>
+      const CATALOG = [
+        {
+          id: 1,
+          title: "Lost Mary Tappo 750mAh Prefilled Pod Device",
+          brand: "Lost Mary",
+          multiBuy: "2 for £16",
+          puffs: "600 Puffs",
+          battery: "750mAh",
+          charge: "Type-C",
+          refilling: "Prefilled",
+          hasLED: false,
+          flavours: "24 FLAVOURS",
+          dealBadge: "2 FOR £16",
+          price: 8.99,
+          comparePrice: 11.99,
+          inStock: true,
+          salesRank: 100,
+          image1: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 2,
+          title: "Elf Bar Elfa Pro Smart Mesh Pod Kit",
+          brand: "Elf Bar",
+          multiBuy: "4 for £12",
+          puffs: "600 Puffs",
+          battery: "500mAh",
+          charge: "Type-C",
+          refilling: "Prefilled",
+          hasLED: true,
+          flavours: "32 FLAVOURS",
+          dealBadge: "4 FOR £12",
+          price: 5.99,
+          comparePrice: 7.99,
+          inStock: true,
+          salesRank: 98,
+          image1: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 3,
+          title: "SKE Crystal Plus Pod Starter Kit",
+          brand: "SKE Crystal",
+          multiBuy: "2 for £16",
+          puffs: "600 Puffs",
+          battery: "400mAh",
+          charge: "Type-C",
+          refilling: "Prefilled",
+          hasLED: false,
+          flavours: "15 FLAVOURS",
+          dealBadge: "2 FOR £16",
+          price: 7.99,
+          comparePrice: 9.99,
+          inStock: true,
+          salesRank: 95,
+          image1: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 4,
+          title: "Hayati Pro Ultra 15000 Smart Pod Device",
+          brand: "Hayati",
+          multiBuy: "2 for £20",
+          puffs: "15000 Puffs",
+          battery: "850mAh",
+          charge: "Type-C",
+          refilling: "Prefilled",
+          hasLED: true,
+          flavours: "28 FLAVOURS",
+          dealBadge: "2 FOR £20",
+          price: 13.99,
+          comparePrice: 17.99,
+          inStock: true,
+          salesRank: 92,
+          image1: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 5,
+          title: "Elux Cyberover 6000 Big Capacity Pod Kit",
+          brand: "Elux",
+          multiBuy: "2 for £20",
+          puffs: "6000 Puffs",
+          battery: "650mAh",
+          charge: "Type-C",
+          refilling: "Prefilled",
+          hasLED: true,
+          flavours: "20 FLAVOURS",
+          dealBadge: "2 FOR £20",
+          price: 12.99,
+          comparePrice: 15.99,
+          inStock: true,
+          salesRank: 89,
+          image1: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 6,
+          title: "Lost Mary BM6000 Rechargeable Big Puff Device",
+          brand: "Lost Mary",
+          multiBuy: "2 for £20",
+          puffs: "6000 Puffs",
+          battery: "650mAh",
+          charge: "Type-C",
+          refilling: "Prefilled",
+          hasLED: true,
+          flavours: "16 FLAVOURS",
+          dealBadge: "2 FOR £20",
+          price: 12.99,
+          comparePrice: 16.99,
+          inStock: true,
+          salesRank: 88,
+          image1: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 7,
+          title: "IVG 2400 4-in-1 Revolver Pod System",
+          brand: "IVG",
+          multiBuy: "2 for £20",
+          puffs: "2400 Puffs",
+          battery: "1750mAh",
+          charge: "Fast Charge",
+          refilling: "Prefilled",
+          hasLED: false,
+          flavours: "26 EDITIONS",
+          dealBadge: "2 FOR £20",
+          price: 12.49,
+          comparePrice: 15.99,
+          inStock: true,
+          salesRank: 85,
+          image1: "https://images.unsplash.com/photo-1608248597359-5633b4974751?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 8,
+          title: "Oxva Xlim SQ Pro Pod Starter Kit",
+          brand: "Oxva",
+          multiBuy: null,
+          puffs: "1000 Puffs",
+          battery: "1200mAh",
+          charge: "Type-C",
+          refilling: "Replaceable",
+          hasLED: true,
+          flavours: "18 FLAVOURS",
+          dealBadge: null,
+          price: 19.99,
+          comparePrice: 24.99,
+          inStock: true,
+          salesRank: 84,
+          image1: "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 9,
+          title: "SKE Crystal Bar 4in1 Multi-Pod System",
+          brand: "SKE Crystal",
+          multiBuy: "2 for £20",
+          puffs: "2400 Puffs",
+          battery: "950mAh",
+          charge: "Type-C",
+          refilling: "Prefilled",
+          hasLED: false,
+          flavours: "16 EDITIONS",
+          dealBadge: "2 FOR £20",
+          price: 12.49,
+          comparePrice: 14.99,
+          inStock: true,
+          salesRank: 80,
+          image1: "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 10,
+          title: "VooPoo Argus Pod SE Device Kit",
+          brand: "VooPoo",
+          multiBuy: "2 for £16",
+          puffs: "1000 Puffs",
+          battery: "800mAh",
+          charge: "Type-C",
+          refilling: "Replaceable",
+          hasLED: true,
+          flavours: "12 FLAVOURS",
+          dealBadge: "2 FOR £16",
+          price: 14.99,
+          comparePrice: 18.99,
+          inStock: false,
+          salesRank: 78,
+          image1: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 11,
+          title: "Elf Bar Mate 500 Semi-Disposable Kit",
+          brand: "Elf Bar",
+          multiBuy: "4 for £12",
+          puffs: "600 Puffs",
+          battery: "500mAh",
+          charge: "Type-C",
+          refilling: "Prefilled",
+          hasLED: false,
+          flavours: "22 FLAVOURS",
+          dealBadge: "4 FOR £12",
+          price: 6.99,
+          comparePrice: 8.99,
+          inStock: true,
+          salesRank: 75,
+          image1: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 12,
+          title: "Hayati Remix 2400 4-in-1 Pod System",
+          brand: "Hayati",
+          multiBuy: "2 for £20",
+          puffs: "2400 Puffs",
+          battery: "850mAh",
+          charge: "Type-C",
+          refilling: "Prefilled",
+          hasLED: false,
+          flavours: "20 FLAVOURS",
+          dealBadge: "2 FOR £20",
+          price: 12.99,
+          comparePrice: 15.99,
+          inStock: true,
+          salesRank: 74,
+          image1: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 13,
+          title: "Elux Legend Pro 10000 Pod Device",
+          brand: "Elux",
+          multiBuy: "2 for £20",
+          puffs: "10000 Puffs",
+          battery: "850mAh",
+          charge: "Type-C",
+          refilling: "Prefilled",
+          hasLED: true,
+          flavours: "18 FLAVOURS",
+          dealBadge: "2 FOR £20",
+          price: 13.99,
+          comparePrice: 17.99,
+          inStock: true,
+          salesRank: 72,
+          image1: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 14,
+          title: "Lost Mary QM600 Mesh Edition Device",
+          brand: "Lost Mary",
+          multiBuy: "4 for £12",
+          puffs: "600 Puffs",
+          battery: "550mAh",
+          charge: "Type-C",
+          refilling: "Prefilled",
+          hasLED: false,
+          flavours: "18 FLAVOURS",
+          dealBadge: "4 FOR £12",
+          price: 6.49,
+          comparePrice: 7.99,
+          inStock: true,
+          salesRank: 70,
+          image1: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 15,
+          title: "Oxva Xlim Pro 2 30W Pod Starter Kit",
+          brand: "Oxva",
+          multiBuy: null,
+          puffs: "1000 Puffs",
+          battery: "1300mAh",
+          charge: "Fast Charge",
+          refilling: "Refillable",
+          hasLED: true,
+          flavours: "14 FLAVOURS",
+          dealBadge: null,
+          price: 24.99,
+          comparePrice: 29.99,
+          inStock: true,
+          salesRank: 69,
+          image1: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=500&auto=format&fit=crop&q=80"
+        },
+        {
+          id: 16,
+          title: "VooPoo Doric Q Rechargeable Pod System",
+          brand: "VooPoo",
+          multiBuy: "2 for £16",
+          puffs: "600 Puffs",
+          battery: "800mAh",
+          charge: "Type-C",
+          refilling: "Replaceable",
+          hasLED: false,
+          flavours: "10 FLAVOURS",
+          dealBadge: "2 FOR £16",
+          price: 9.99,
+          comparePrice: 12.99,
+          inStock: true,
+          salesRank: 65,
+          image1: "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=500&auto=format&fit=crop&q=80",
+          image2: "https://images.unsplash.com/photo-1608248597359-5633b4974751?w=500&auto=format&fit=crop&q=80"
+        }
+      ];
+
+      let activeTabBrand = 'all';
+      let activeSort = 'best-selling';
+
+      function renderGrid(products) {
+        const grid = document.getElementById('productsGrid');
+        const countNum = document.getElementById('productCountNum');
+
+        countNum.textContent = products.length;
+
+        if (products.length === 0) {
+          grid.innerHTML = `
+            <li class="collection-empty">
+              <h3 class="collection-empty__title">No products match your criteria</h3>
+              <p class="collection-empty__text">Try adjusting your filters or search terms.</p>
+              <button type="button" class="collection-empty__btn" onclick="resetAllFilters()">Reset All Filters</button>
+            </li>
+          `;
+          return;
+        }
+
+        grid.innerHTML = products.map((p) => {
+          return `
+            <li class="product-grid__item">
+              <article class="product-card">
+                <!-- Badges Row: Flavour Badge (Left) & Multi-Buy Badge (Right) -->
+                <div class="product-card__badges">
+                  ${p.flavours ? `<span class="flavour-badge">${p.flavours}</span>` : '<span></span>'}
+                  ${p.dealBadge ? `<span class="deal-badge">${p.dealBadge}</span>` : '<span></span>'}
+                </div>
+
+                <!-- Centered Product Image -->
+                <div class="product-card__media-wrap">
+                  <a href="#" class="product-card__image-link">
+                    <img src="${p.image1}" alt="${p.title}" class="product-card__image product-card__image--primary" loading="lazy">
+                    <img src="${p.image2}" alt="${p.title}" class="product-card__image product-card__image--secondary" loading="lazy">
+                  </a>
+                </div>
+
+                <!-- Product Details -->
+                <div class="product-card__content">
+                  
+                  <!-- Specs Row -->
+                  <div class="product-card__specs-row">
+                    ${p.puffs ? `<span class="spec-pill">${p.puffs}</span>` : ''}
+                    ${p.battery ? `<span class="spec-pill">${p.battery}</span>` : ''}
+                    ${p.charge ? `<span class="spec-pill">${p.charge}</span>` : ''}
+                    ${p.hasLED ? `<span class="spec-pill spec-pill--led">LED Display</span>` : ''}
+                  </div>
+
+                  <!-- Title -->
+                  <h3 class="product-card__title">
+                    <a href="#" class="product-card__title-link">${p.title}</a>
+                  </h3>
+
+                  <!-- Price -->
+                  <div class="product-card__price-row">
+                    <span class="product-price-current">£${p.price.toFixed(2)}</span>
+                    ${p.comparePrice > p.price ? `<span class="product-price-compare">£${p.comparePrice.toFixed(2)}</span>` : ''}
+                  </div>
+
+                  <!-- Stock Status -->
+                  <div class="product-card__stock-status ${p.inStock ? 'stock-status--in' : 'stock-status--out'}">
+                    <span class="stock-dot"></span>
+                    <span>${p.inStock ? 'In stock' : 'Out of stock'}</span>
+                  </div>
+
+                  <!-- Action Button -->
+                  <a href="#" class="product-card__button">
+                    ${p.inStock ? 'Select Options' : 'Out of stock'}
+                  </a>
+                </div>
+              </article>
+            </li>
+          `;
+        }).join('');
+      }
+
+      function filterProducts() {
+        // Collect checked sidebar values
+        const checkedMultiBuy = Array.from(document.querySelectorAll('input[name="multiBuy"]:checked')).map(el => el.value);
+        const checkedBrands = Array.from(document.querySelectorAll('input[name="brand"]:checked')).map(el => el.value);
+        const checkedPuffs = Array.from(document.querySelectorAll('input[name="puffs"]:checked')).map(el => el.value);
+        const checkedRefilling = Array.from(document.querySelectorAll('input[name="refilling"]:checked')).map(el => el.value);
+
+        let filtered = CATALOG.filter(p => {
+          // Tab bar filter
+          if (activeTabBrand !== 'all' && p.brand !== activeTabBrand) {
+            return false;
+          }
+          // Sidebar Multi Buy
+          if (checkedMultiBuy.length > 0 && (!p.multiBuy || !checkedMultiBuy.includes(p.multiBuy))) {
+            return false;
+          }
+          // Sidebar Brand
+          if (checkedBrands.length > 0 && !checkedBrands.includes(p.brand)) {
+            return false;
+          }
+          // Sidebar Puffs
+          if (checkedPuffs.length > 0 && !checkedPuffs.includes(p.puffs)) {
+            return false;
+          }
+          // Sidebar Refilling
+          if (checkedRefilling.length > 0 && !checkedRefilling.includes(p.refilling)) {
+            return false;
+          }
+          return true;
+        });
+
+        // Apply Sorting
+        filtered = sortList(filtered, activeSort);
+
+        updateActiveChipsRow(checkedMultiBuy, checkedBrands, checkedPuffs, checkedRefilling);
+        renderGrid(filtered);
+      }
+
+      function sortList(list, sortKey) {
+        const arr = [...list];
+        switch(sortKey) {
+          case 'best-selling':
+            return arr.sort((a, b) => b.salesRank - a.salesRank);
+          case 'price-low':
+            return arr.sort((a, b) => a.price - b.price);
+          case 'price-high':
+            return arr.sort((a, b) => b.price - a.price);
+          case 'title-az':
+            return arr.sort((a, b) => a.title.localeCompare(b.title));
+          case 'title-za':
+            return arr.sort((a, b) => b.title.localeCompare(a.title));
+          case 'date-new':
+            return arr.sort((a, b) => b.id - a.id);
+          default:
+            return arr;
+        }
+      }
+
+      function handleSort(val) {
+        activeSort = val;
+        filterProducts();
+      }
+
+      function handleSidebarChange() {
+        filterProducts();
+      }
+
+      function selectBrandTab(brand) {
+        activeTabBrand = brand;
+        document.querySelectorAll('.brand-tab-btn').forEach(btn => {
+          btn.classList.toggle('is-active', btn.dataset.brand === brand);
+        });
+        filterProducts();
+      }
+
+      function filterByDeal(deal) {
+        // Check the deal checkbox in the sidebar and trigger filter
+        document.querySelectorAll('input[name="multiBuy"]').forEach(cb => {
+          cb.checked = (cb.value === deal);
+        });
+        filterProducts();
+      }
+
+      function toggleSeeMore(containerId, btn) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const isExp = container.classList.toggle('is-expanded');
+        btn.textContent = isExp ? '- See less' : '+ See more';
+      }
+
+      function updateActiveChipsRow(multi, brands, puffs, refilling) {
+        const row = document.getElementById('activeChipsRow');
+        const list = document.getElementById('activeChipsList');
+
+        const allChips = [];
+        if (activeTabBrand !== 'all') {
+          allChips.push({ label: `Brand Tab: ${activeTabBrand}`, reset: () => selectBrandTab('all') });
+        }
+        multi.forEach(v => allChips.push({ label: v, uncheck: () => uncheckOption('multiBuy', v) }));
+        brands.forEach(v => allChips.push({ label: v, uncheck: () => uncheckOption('brand', v) }));
+        puffs.forEach(v => allChips.push({ label: v, uncheck: () => uncheckOption('puffs', v) }));
+        refilling.forEach(v => allChips.push({ label: v, uncheck: () => uncheckOption('refilling', v) }));
+
+        if (allChips.length === 0) {
+          row.style.display = 'none';
+          list.innerHTML = '';
+          return;
+        }
+
+        row.style.display = 'flex';
+        list.innerHTML = allChips.map((c, idx) => `
+          <span class="active-chip">
+            ${c.label}
+            <span class="active-chip-remove" onclick="window.__chipsCallbacks[${idx}]()">&times;</span>
+          </span>
+        `).join('');
+
+        window.__chipsCallbacks = allChips.map(c => c.uncheck || c.reset);
+      }
+
+      function uncheckOption(name, val) {
+        const el = document.querySelector(`input[name="${name}"][value="${val}"]`);
+        if (el) el.checked = false;
+        filterProducts();
+      }
+
+      function resetAllFilters() {
+        document.querySelectorAll('.filter-checkbox-input').forEach(cb => cb.checked = false);
+        selectBrandTab('all');
+        document.getElementById('sortDropdown').value = 'best-selling';
+        activeSort = 'best-selling';
+        filterProducts();
+      }
+
+      // Initial Render
+      document.addEventListener('DOMContentLoaded', () => {
+        filterProducts();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "general": {
+    "breadcrumbs": {
+      "home": "Home",
+      "collections": "Collections"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {{ number }}"
+    }
+  },
+  "products": {
+    "product": {
+      "regular_price": "Regular price",
+      "sale_price": "Sale price",
+      "unit_price": "Unit price",
+      "sold_out": "Sold out",
+      "on_sale": "Sale",
+      "view": "View Product",
+      "choose_options": "Choose Options"
+    },
+    "facets": {
+      "filter_button": "Filter",
+      "filters": "Filters",
+      "clear_all": "Clear all",
+      "apply": "Apply Filters",
+      "sort_by_label": "Sort by",
+      "from": "From",
+      "to": "To",
+      "reset": "Reset",
+      "product_count": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} products"
+      },
+      "empty": "No products found"
+    }
+  }
+}
